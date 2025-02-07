@@ -34,3 +34,17 @@ def movie_detail_view(request, movie_id):
     }
     
     return render(request, "movie_details.html", context)
+
+
+def about_view(request):
+    return render(request, "about.html")
+
+
+
+def search_view(request):
+    query = request.GET.get("q", "").strip()
+    if query:
+        movies = Movie.objects.filter(title__icontains=query)
+    else:
+        movies = Movie.objects.none()
+    return render(request, "search.html", {"movies": movies, "search_query": query})

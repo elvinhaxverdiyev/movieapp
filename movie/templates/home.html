@@ -23,13 +23,14 @@
                 <a class="nav-link" aria-current="page" href="{% url 'home' %}"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Home</font></font></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">About</font></font></a>
+                <a class="nav-link" href="{% url 'about' %}"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">About</font></font></a>
               </li>
             </ul>
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Aramak" aria-label="Aramak">
-              <button class="btn btn-outline-light" type="submit" fdprocessedid="o7c9ds"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Aramak</font></font></button>
-            </form>
+            <form class="d-flex" method="GET" action="{% url 'search' %}">
+              <input class="form-control me-2" type="text" name="q" placeholder="Aramak" value="{{ search_query }}">
+              <button class="btn btn-outline-light" type="submit">Aramak</button>
+          </form>
+          
           </div>
         </div>
       </nav>

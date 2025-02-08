@@ -74,7 +74,7 @@
                   <a class="nav-link" href="{% url 'logout' %}"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Logout</font></font></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Welcome</font></font></a>
+                  <a class="nav-link" href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Welcome, {{ user.username }}</font></font></a>
                 </li>
                 {% else %}
                 <a class="nav-link" aria-current="page" href="{% url 'login' %}"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Login</font></font></a>

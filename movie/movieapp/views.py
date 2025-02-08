@@ -16,10 +16,6 @@ def movies_view(request):
         return render(request, "movies.html", {"movies": movies})
     
 
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import Movie
-from .forms import CommentForm
 
 @login_required
 def movie_detail_view(request, movie_id):

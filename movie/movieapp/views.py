@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Movie
+from .models import Movie, Contact
 from . forms import CommentForm
 
 def home_view(request):
+    """Renders the "home.html" template and does not send any additional context."""
     return render(request, "home.html")
+
+
 
 def movies_view(request):
     movies = Movie.objects.all()
@@ -12,7 +15,8 @@ def movies_view(request):
         
         return render(request, "movies.html", {"movies": movies})
     
-@login_required
+
+
 def movie_detail_view(request, movie_id):
     movie = get_object_or_404(Movie, pk=movie_id)
     
@@ -36,6 +40,7 @@ def movie_detail_view(request, movie_id):
     return render(request, "movie_details.html", context)
 
 
+
 def about_view(request):
     return render(request, "about.html")
 
@@ -48,3 +53,10 @@ def search_view(request):
     else:
         movies = Movie.objects.none()
     return render(request, "search.html", {"movies": movies, "search_query": query})
+
+
+
+
+def contact_info(request):
+    contact = Contact.objects.all() 
+    return render(request, "home.html", {"contact_info": contact})

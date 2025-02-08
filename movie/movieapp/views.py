@@ -16,10 +16,15 @@ def movies_view(request):
         return render(request, "movies.html", {"movies": movies})
     
 
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Movie
+from .forms import CommentForm
 
+@login_required
 def movie_detail_view(request, movie_id):
     movie = get_object_or_404(Movie, pk=movie_id)
-    
+
     if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -27,7 +32,7 @@ def movie_detail_view(request, movie_id):
             comment.movie = movie
             comment.user = request.user
             comment.save()
-            
+
             return redirect("movie_detail", movie_id=movie_id)
     else:
         form = CommentForm()
@@ -36,8 +41,9 @@ def movie_detail_view(request, movie_id):
         "movie": movie,
         "comment_form": form,
     }
-    
+
     return render(request, "movie_details.html", context)
+
 
 
 

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Movie, Contact
+from .models import Movie, Contact, Comment
 from . forms import CommentForm
 
 def home_view(request):
@@ -40,6 +40,15 @@ def movie_detail_view(request, movie_id):
 
     return render(request, "movie_details.html", context)
 
+
+@login_required
+def delete_comment_view(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+    
+    if comment.user == request.user or request.user.is_superuser:
+        comment.delete()
+        
+    return redirect(request.META.get("HTTP_REFERER", "home"))
 
 
 

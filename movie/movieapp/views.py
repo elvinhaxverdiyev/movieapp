@@ -46,10 +46,10 @@ def delete_comment_view(request, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
     
     if comment.user == request.user or request.user.is_superuser:
+        movie_id = comment.movie.id
         comment.delete()
         
-    return redirect(request.META.get("HTTP_REFERER", "home"))
-
+    return redirect('movie_detail', movie_id=movie_id)
 
 
 def about_view(request):

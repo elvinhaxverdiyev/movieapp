@@ -120,13 +120,14 @@
     {% endfor %}
     
     <h4>Leave a Comment</h4>
-    <form method="post" class="comment-form">
+    <!-- Formun action'ını add_comment view'ine yönləndir -->
+    <form method="post" class="comment-form" action="{% url 'add_comment' movie_id=movie.id %}">
         {% csrf_token %}
-        {{ comment_form.user_name }}
-        {{ comment_form.comment }}
+        {{ comment_form.as_p }}
         <button type="submit" class="btn btn-primary">Submit Comment</button>
     </form>
 </div>
+
 
  
 {% include 'footer.html' %}
